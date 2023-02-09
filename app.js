@@ -15,7 +15,7 @@ app.use(express.json());
 mongoose.connect(db.mongoURI,{
     useNewURLParser:true
 }).then(function(){
-    console.log("connected to MonoDB Database");
+    console.log("connected to MongoDB Database");
 }).catch(function(err){
     console.log(err);
 });
@@ -50,6 +50,20 @@ app.post("/deleteGame", function(req,res){
     Game.findByIdAndDelete(req.body.game).exec();
     res.redirect('gameList.html');
 });
+
+//update route
+app.get("/getID::id", function(req, res){
+    console.log(req.params.id);
+    res.redirect(`updatePage.html?id=${req.params.id}`);
+})
+
+app.post("/updateGame", function(req, res){
+    console.log(req.body);
+    Game.findByIdAndUpdate(req.body.id, {game:req.body.game}, function(){
+        res.redirect('gameList.html');
+    });
+    
+})
 
 app.use(express.static(__dirname+"/pages"));
 app.listen(port, function(){
