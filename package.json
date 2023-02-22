@@ -13,5 +13,14 @@
   },
   "author": "",
   "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willkirt/Mongoose-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/willkirt/Mongoose-example/issues"
+  },
+  "homepage": "https://github.com/willkirt/Mongoose-example#readme",
   "description": ""
 }
