@@ -3,7 +3,6 @@ var app = express();
 var path = require("path");
 var bodyparser = require("body-parser");
 var mongoose = require("mongoose");
-const { response } = require("express");
 var port = process.env.port||3000;
 var db = require("./config/database");
 
@@ -67,14 +66,14 @@ app.post("/updateGame", function(req, res){
 
 app.post("/searchGames", function(req, res){
     console.log(req.body.game);
-    //res.redirect("searched.html?game=" + req.body.game);
+    //res.redirect("searchPage.html?game=" + req.body.game);
 
     Game.find({"game":req.body.game}).then(function(game){
         //console.log(game[0].game);
-        //res.redirect("searched.html?game=" + game);
-        res.redirect("searched.html?id=" + game[0]._id + "&game=" + game[0].game);
+        //res.redirect("searchPage.html?game=" + game);
+        res.redirect("searchPage.html?id=" + game[0]._id + "&game=" + game[0].game);
     }).catch(function(){
-        res.redirect("searched.html?game=");
+        res.redirect("searchPage.html?game=");
     })
 })
 
