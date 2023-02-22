@@ -30,7 +30,7 @@ app.get("/", function(req,res){
 })
 
 app.post("/saveGame", function(req,res){
-    console.log(req.body);
+    //console.log(req.body);
     //res.send(req.body);
 
     new Game(req.body).save().then(function(){
@@ -46,23 +46,44 @@ app.get("/getGames", function(req,res){
 });
 
 app.post("/deleteGame", function(req,res){
-    console.log(`Game deleted ${req.body.game}`);
+    //console.log(`Game deleted ${req.body.game}`);
     Game.findByIdAndDelete(req.body.game).exec();
     res.redirect('gameList.html');
 });
 
 //update route
 app.get("/getID::id", function(req, res){
-    console.log(req.params.id);
+    //console.log(req.params.id);
     res.redirect(`updatePage.html?id=${req.params.id}`);
 })
 
 app.post("/updateGame", function(req, res){
-    console.log(req.body);
+    //console.log(req.body);
     Game.findByIdAndUpdate(req.body.id, {game:req.body.game}, function(){
         res.redirect('gameList.html');
     });
     
+})
+
+app.post("/unity", function(req, res){
+    console.log("Hello from unity");
+
+    var newData = {
+        "level": req.body.level,
+        "timeEapsed": req.body.timeElapsed,
+        "name": req.body.name
+    }
+    console.log(newData);
+})
+
+app.get("/SendUnityData", function(req, res){
+    console.log("Request made");
+    var dataToSend = {
+        "level": 9000,
+        "timeElapsed": 2.75756,
+        "name": "DiggleHopperSmith"
+    }
+    res.send(dataToSend);
 })
 
 app.use(express.static(__dirname+"/pages"));
